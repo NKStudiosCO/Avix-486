@@ -1,9 +1,13 @@
-#!/usr/bin/expect
+echo "$github_user\n"
+expect -c '
+set github_user $env(github_user)
+set github_pass $env(github_pass)
 
 set timeout 5
 spawn git push origin master
-expect "Enter passphrase for key"
-send "hogehoge38\n"
-expect "Last login"
-send "ls -l\n"
+expect "Username"
+send "$github_user\n"
+expect "Password"
+send "$github_pass\n"
 interact
+'
